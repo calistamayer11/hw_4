@@ -30,11 +30,17 @@ class DoublyLinkedList:
         "returns number of nodes in DLL"
         return self._len
 
+    def __contains__(self, item):
+        return item in self._nodes
+
     # TODO: Modify the 4 methods below to keep `self._nodes` up-to-date
     def add_first(self, item):
         "adds item to front of dll"
         # add new node as head
-        self._head = Node(item, _next=self._head, _prev=None)
+        new_node = Node(item, _next=self._head, _prev=None)
+        new_node._next = self._head
+        self._head = new_node
+        self._nodes[item] = new_node
         self._len += 1
 
         # if that was the first node
