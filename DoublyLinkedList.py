@@ -35,9 +35,9 @@ class DoublyLinkedList:
         "adds item to front of dll"
         # add new node as head
         new_node = Node(item, _next=self._head, _prev=None)
-        new_node._next = self._head
-        self._head = new_node
-        self._nodes[item] = new_node
+        # new_node._next = self._head
+        # self._head = new_node
+        # self._nodes[item] = new_node
         self._len += 1
 
         # if that was the first node
@@ -47,6 +47,8 @@ class DoublyLinkedList:
         # otherwise, redirect old heads ._tail pointer
         else:
             self._head._next._prev = self._head
+
+        self._nodes[item] = self._head
 
     def add_last(self, item):
         "adds item to end of dll"
@@ -61,6 +63,8 @@ class DoublyLinkedList:
         # otherwise, redirect old heads ._tail pointer
         else:
             self._tail._prev._next = self._tail
+
+        self._nodes[item] = self._tail
 
     def remove_first(self):
         "removes and returns first item"
@@ -80,6 +84,8 @@ class DoublyLinkedList:
 
         else:
             self._head._prev = None
+
+        self._nodes.pop(item)
 
         return item
 
@@ -101,7 +107,7 @@ class DoublyLinkedList:
 
         else:
             self._tail._next = None
-
+        self._nodes.pop(item)
         return item
 
     # TODO: Add a docstring and implement
