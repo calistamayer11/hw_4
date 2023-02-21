@@ -95,8 +95,8 @@ class testDLL(unittest.TestCase):
     # TODO: Add docstrings to and implement the unittests below
     def test_contains(self):
         dll = DLL(range(4))
-        assert 3 in dll == True
-        assert 7 in dll == False
+        assert 3 in dll
+        assert not 7 in dll
 
     def test_neighbors(self):
         pass

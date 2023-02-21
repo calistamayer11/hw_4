@@ -30,9 +30,6 @@ class DoublyLinkedList:
         "returns number of nodes in DLL"
         return self._len
 
-    def __contains__(self, item):
-        return item in self._nodes
-
     # TODO: Modify the 4 methods below to keep `self._nodes` up-to-date
     def add_first(self, item):
         "adds item to front of dll"
@@ -109,7 +106,7 @@ class DoublyLinkedList:
 
     # TODO: Add a docstring and implement
     def __contains__(self, item):
-        raise NotImplementedError
+        return item in self._nodes
 
     # TODO: Add a docstring and implement
     def neighbors(self, item):
