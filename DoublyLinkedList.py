@@ -32,7 +32,7 @@ class DoublyLinkedList:
 
     # TODO: Modify the 4 methods below to keep `self._nodes` up-to-date
     def add_first(self, item):
-        "adds item to front of dll"
+        """adds item to front of dll"""
         # add new node as head
         self._head = Node(item, _next=self._head, _prev=None)
         self._len += 1
@@ -47,7 +47,7 @@ class DoublyLinkedList:
         self._nodes[item] = self._head
 
     def add_last(self, item):
-        "adds item to end of dll"
+        """adds item to end of dll"""
         # add new node as head
         self._tail = Node(item, _next=None, _prev=self._tail)
         self._len += 1
@@ -63,7 +63,7 @@ class DoublyLinkedList:
         self._nodes[item] = self._tail
 
     def remove_first(self):
-        "removes and returns first item"
+        """removes and returns first item"""
         if len(self) == 0:
             raise RuntimeError("cannot remove from empty dll")
 
@@ -86,7 +86,7 @@ class DoublyLinkedList:
         return item
 
     def remove_last(self):
-        "removes and returns last item"
+        """removes and returns last item"""
         if len(self) == 0:
             raise RuntimeError("cannot remove from empty dll")
 
@@ -113,8 +113,9 @@ class DoublyLinkedList:
 
     # TODO: Add a docstring and implement
     def neighbors(self, item):
+        """returns the previous and next node in the dictionary"""
         if item not in self._nodes:
-            raise RuntimeError
+            raise RuntimeError("Item not found, cannot remove")
 
         node = self._nodes[item]
 
@@ -128,23 +129,23 @@ class DoublyLinkedList:
         else:
             next_node = None
         next_node = node._next.item if node._next is not None else None
-        if node.item not in self._nodes:
-            raise RuntimeError
         return previous_node, next_node
 
     # TODO: Add a docstring and implement
     def remove_node(self, item):
-        if item in self._nodes:
-            node = self._nodes[item]
-            if node == self._head and node == self._tail:
-                self._head = None
-                self._tail = None
-            elif node == self._head:
-                self.remove_first()
-            elif node == self._tail:
-                self.remove_last()
-            else:
-                node._prev._next = node._next
-                node._next._prev = node._prev
-            # del self._nodes[item]
-        return self._nodes[node.item]
+        """removes the node in the list"""
+        if not item in self._nodes:
+            raise RuntimeError("Item not found, cannot remove")
+
+        node = self._nodes[item]
+        if node == self._head and node == self._tail:
+            self._head = None
+            self._tail = None
+        elif node == self._head:
+            self.remove_first()
+        elif node == self._tail:
+            self.remove_last()
+        else:
+            node._prev._next = node._next
+            node._next._prev = node._prev
+        return node
