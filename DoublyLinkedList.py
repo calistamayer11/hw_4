@@ -34,10 +34,7 @@ class DoublyLinkedList:
     def add_first(self, item):
         "adds item to front of dll"
         # add new node as head
-        new_node = Node(item, _next=self._head, _prev=None)
-        # new_node._next = self._head
-        # self._head = new_node
-        # self._nodes[item] = new_node
+        self._head = Node(item, _next=self._head, _prev=None)
         self._len += 1
 
         # if that was the first node
@@ -47,7 +44,6 @@ class DoublyLinkedList:
         # otherwise, redirect old heads ._tail pointer
         else:
             self._head._next._prev = self._head
-
         self._nodes[item] = self._head
 
     def add_last(self, item):
@@ -85,7 +81,7 @@ class DoublyLinkedList:
         else:
             self._head._prev = None
 
-        self._nodes.pop(item)
+        del self._nodes[item]
 
         return item
 
@@ -107,7 +103,8 @@ class DoublyLinkedList:
 
         else:
             self._tail._next = None
-        self._nodes.pop(item)
+        del self._nodes[item]
+
         return item
 
     # TODO: Add a docstring and implement
@@ -116,8 +113,38 @@ class DoublyLinkedList:
 
     # TODO: Add a docstring and implement
     def neighbors(self, item):
-        raise NotImplementedError
+        if item not in self._nodes:
+            raise RuntimeError
+
+        node = self._nodes[item]
+
+        if node._prev is not None:
+            previous_node = node._prev.item
+        else:
+            previous_node = None
+
+        if node._next is not None:
+            next_node = node._next.item
+        else:
+            next_node = None
+        next_node = node._next.item if node._next is not None else None
+        if node.item not in self._nodes:
+            raise RuntimeError
+        return previous_node, next_node
 
     # TODO: Add a docstring and implement
     def remove_node(self, item):
-        raise NotImplementedError
+        if item in self._nodes:
+            node = self._nodes[item]
+            if node == self._head and node == self._tail:
+                self._head = None
+                self._tail = None
+            elif node == self._head:
+                self.remove_first()
+            elif node == self._tail:
+                self.remove_last()
+            else:
+                node._prev._next = node._next
+                node._next._prev = node._prev
+            # del self._nodes[item]
+        return self._nodes[node.item]

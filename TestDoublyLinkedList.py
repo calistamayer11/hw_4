@@ -95,14 +95,28 @@ class testDLL(unittest.TestCase):
     # TODO: Add docstrings to and implement the unittests below
     def test_contains(self):
         dll = DLL(range(4))
-        assert 3 in dll
-        assert not 7 in dll
+        self.assertTrue(3 in dll)
+        self.assertFalse(7 in dll)
 
     def test_neighbors(self):
-        pass
+        dll = DLL(range(7))
+        number = dll.neighbors(4)
+        test_pair = (3, 5)
+        self.assertEqual(number, test_pair)
+
+        number_head = dll.neighbors(0)
+        test_pair_head = (None, 1)
+        self.assertEqual(number_head, test_pair_head)
+
+        number_tail = dll.neighbors(6)
+        test_pair_tail = (5, None)
+        self.assertEqual(number_tail, test_pair_tail)
 
     def test_remove_item(self):
-        pass
+        dll = DLL(range(5))
+        remove = dll.remove_node(0)
+        test_pair = (None, 1)
+        self.assertEqual(remove, test_pair)
 
 
 unittest.main()
