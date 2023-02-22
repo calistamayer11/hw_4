@@ -33,6 +33,9 @@ class DoublyLinkedList:
     # TODO: Modify the 4 methods below to keep `self._nodes` up-to-date
     def add_first(self, item):
         """adds item to front of dll"""
+        if item in self._nodes:
+            raise RuntimeError("Item already in dll")
+
         # add new node as head
         self._head = Node(item, _next=self._head, _prev=None)
         self._len += 1
@@ -152,3 +155,11 @@ class DoublyLinkedList:
             self._len -= 1
 
         return node
+
+
+if __name__ == "__main__":
+    dll = DoublyLinkedList(range(5))
+    dll.add_first(3)
+    print(dll)
+    dll.add_first(3)
+    print(dll)
