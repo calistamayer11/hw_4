@@ -148,4 +148,7 @@ class DoublyLinkedList:
         else:
             node._prev._next = node._next
             node._next._prev = node._prev
+            del self._nodes[item]
+            self._len -= 1
+
         return node

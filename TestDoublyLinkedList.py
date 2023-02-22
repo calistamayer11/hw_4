@@ -122,15 +122,15 @@ class testDLL(unittest.TestCase):
         dll = DLL(range(5))
         # dll should have 5 nodes
         self.assertEqual(len(dll), 5)
-        remove = dll.remove_node(0)
-        # Now dll shoud have 4 nodes after removing item 0
+        remove = dll.remove_node(2)
+        # Now dll shoud have 4 nodes after removing item 2
         self.assertEqual(len(dll), 4)
         self.assertIsInstance(remove, Node)
-        self.assertEqual(remove.item, 0)
+        self.assertEqual(remove.item, 2)
 
-        # already removed 0, cannot remove again
+        # already removed 2, cannot remove again
         with self.assertRaises(RuntimeError):
-            dll.remove_node(0)
+            dll.remove_node(2)
 
 
 unittest.main()
