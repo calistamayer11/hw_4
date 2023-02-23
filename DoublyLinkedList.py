@@ -27,7 +27,7 @@ class DoublyLinkedList:
                 self.add_last(item)
 
     def __len__(self):
-        "returns number of nodes in DLL"
+        """returns number of nodes in DLL"""
         return self._len
 
     # TODO: Modify the 4 methods below to keep `self._nodes` up-to-date
@@ -51,6 +51,9 @@ class DoublyLinkedList:
 
     def add_last(self, item):
         """adds item to end of dll"""
+        if item in self._nodes:
+            raise RuntimeError("Item already in dll")
+
         # add new node as head
         self._tail = Node(item, _next=None, _prev=self._tail)
         self._len += 1
@@ -155,11 +158,3 @@ class DoublyLinkedList:
             self._len -= 1
 
         return node
-
-
-if __name__ == "__main__":
-    dll = DoublyLinkedList(range(5))
-    dll.add_first(3)
-    print(dll)
-    dll.add_first(3)
-    print(dll)
